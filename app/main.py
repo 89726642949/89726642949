@@ -3,7 +3,7 @@ import logging
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
-from app.services.utils import setup_logging
+from app.services.utils import setup_logging, resource_path
 from app.services.db import Database, init_db
 from app.services.auth import has_user, create_user, verify_user
 from app.services.sample_data import seed_sample_data
@@ -13,7 +13,7 @@ from app.ui.main_window import MainWindow
 
 def load_styles(app: QApplication):
     try:
-        with open("app/assets/style.qss", "r", encoding="utf-8") as f:
+        with open(resource_path("app/assets/style.qss"), "r", encoding="utf-8") as f:
             app.setStyleSheet(f.read())
     except FileNotFoundError:
         pass

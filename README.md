@@ -65,6 +65,29 @@ Na primeira abertura, o sistema vai pedir para criar a senha.
 
 ---
 
+## Gerar EXE (opcional - recomendado para uso diario)
+1. Ative o ambiente virtual:
+```
+cd C:\SistemaAtividades
+.venv\Scripts\activate
+```
+2. Instale o PyInstaller:
+```
+pip install pyinstaller
+```
+3. (Opcional) Para icone personalizado:
+   - Coloque um arquivo `icon.ico` em `app\assets\icon.ico`.
+4. Execute o build:
+```
+build_exe.bat
+```
+5. O executavel ficara em:
+```
+dist\SistemaAtividades.exe
+```
+
+---
+
 ## Criar atalho na area de trabalho
 1. Abra o Bloco de Notas e cole:
 ```
@@ -96,6 +119,9 @@ python -m app.main
 2. Substitua apenas a pasta `app/` e os arquivos `.py`.
 3. Nao apague as pastas `data/`, `attachments/`, `reports/`.
 4. Abra o sistema normalmente.
+
+Se estiver usando o **.exe**, basta substituir o exe gerado e manter
+as pastas `data/`, `attachments/`, `reports/` no mesmo diretorio.
 
 ---
 

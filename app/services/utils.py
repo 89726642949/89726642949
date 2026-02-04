@@ -1,4 +1,5 @@
 import os
+import sys
 import logging
 from datetime import datetime, date
 
@@ -7,7 +8,16 @@ APP_NAME = "Sistema de Atividades"
 
 
 def base_dir() -> str:
+    if getattr(sys, "frozen", False):
+        return os.path.dirname(sys.executable)
     return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+
+def resource_path(relative_path: str) -> str:
+    if getattr(sys, "frozen", False):
+        base = getattr(sys, "_MEIPASS", base_dir())
+        return os.path.join(base, relative_path)
+    return os.path.join(base_dir(), relative_path)
 
 
 def data_dir() -> str:
