@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Controle de Gastos</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Organize seu dinheiro</p>
+          <h1>Controle de gastos prático e simples</h1>
+          <p class="subtitle">
+            Registre despesas e receitas em segundos, acompanhe o saldo e veja
+            o resumo do mês sem depender de planilhas.
+          </p>
+        </div>
+        <div class="hero-info">
+          <div class="info-card">
+            <span class="info-title">Resumo atual</span>
+            <span id="summary-label" class="info-value">Todos os lançamentos</span>
+          </div>
+          <div class="info-card">
+            <span class="info-title">Dados</span>
+            <span class="info-value">Salvos no navegador</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="summary">
+        <div class="summary-card income">
+          <p>Receitas</p>
+          <h2 id="income-total">R$ 0,00</h2>
+        </div>
+        <div class="summary-card expense">
+          <p>Despesas</p>
+          <h2 id="expense-total">R$ 0,00</h2>
+        </div>
+        <div class="summary-card balance">
+          <p>Saldo</p>
+          <h2 id="balance-total">R$ 0,00</h2>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Novo lançamento</h2>
+          <p>Use o formulário para adicionar uma despesa ou receita.</p>
+        </div>
+        <form id="entry-form" class="entry-form">
+          <div class="type-toggle" role="radiogroup" aria-label="Tipo de lançamento">
+            <input type="radio" id="type-expense" name="type" value="expense" checked />
+            <label for="type-expense">Despesa</label>
+            <input type="radio" id="type-income" name="type" value="income" />
+            <label for="type-income">Receita</label>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Descrição
+              <input
+                type="text"
+                name="description"
+                id="description"
+                placeholder="Ex: Mercado, salário, Netflix"
+                required
+                maxlength="60"
+              />
+            </label>
+            <label>
+              Valor (R$)
+              <input
+                type="number"
+                name="amount"
+                id="amount"
+                placeholder="0,00"
+                required
+                step="0.01"
+                min="0"
+                inputmode="decimal"
+              />
+            </label>
+            <label>
+              Categoria
+              <select name="category" id="category" required></select>
+            </label>
+            <label>
+              Data
+              <input type="date" name="date" id="date" required />
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="submit-entry" class="primary">
+              Adicionar lançamento
+            </button>
+            <button type="button" id="clear-form" class="ghost">Limpar</button>
+            <button type="button" id="cancel-edit" class="ghost hidden">
+              Cancelar edição
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Filtros rápidos</h2>
+          <p>Encontre lançamentos do período que você precisa.</p>
+        </div>
+        <div class="filters">
+          <label>
+            Mês
+            <input type="month" id="filter-month" />
+          </label>
+          <label>
+            Categoria
+            <select id="filter-category"></select>
+          </label>
+          <label class="search">
+            Buscar
+            <input
+              type="search"
+              id="filter-text"
+              placeholder="Descrição ou categoria"
+            />
+          </label>
+          <div class="filter-actions">
+            <button type="button" id="clear-filters" class="ghost">
+              Limpar filtros
+            </button>
+            <button type="button" id="export-data" class="ghost">
+              Exportar
+            </button>
+            <label class="import-button ghost">
+              Importar
+              <input type="file" id="import-data" accept="application/json" />
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header list-header">
+          <div>
+            <h2>Lançamentos</h2>
+            <p id="list-meta">Nenhum lançamento encontrado.</p>
+          </div>
+          <div class="tips">
+            <span class="tip">Clique em editar para corrigir um item</span>
+            <span class="tip">Use exportar para backup</span>
+          </div>
+        </div>
+        <div class="table">
+          <div class="table-row table-head">
+            <span>Data</span>
+            <span>Descrição</span>
+            <span>Categoria</span>
+            <span>Tipo</span>
+            <span>Valor</span>
+            <span>Ações</span>
+          </div>
+          <div id="entries-body" class="table-body"></div>
+        </div>
+        <p id="empty-state" class="empty-state hidden">
+          Você ainda não tem lançamentos. Que tal adicionar o primeiro?
+        </p>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <p>
+        Dica: seus dados ficam somente neste navegador. Exporte para ter um
+        backup.
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
